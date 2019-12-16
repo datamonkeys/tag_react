@@ -1,0 +1,48 @@
+.App {
+  text-align: center;
+}
+
+.App-header, .App-main, .App-sidebar, .App-content, .App-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  color: white;
+}
+
+.App-main {
+  background-color: #fafafa;
+  min-height: 80vh;
+  color: #282c34;
+}
+
+.App-sidebar {
+  background-color: #f7f7f7;
+  min-height: 80vh;
+  color: #282c34;
+  border-right: 1px solid #ececec;
+  flex: 0.3;
+}
+
+.App-content {
+  background-color: #fafafa;
+  min-height: 80vh;
+  color: #282c34;
+  flex: 0.7;
+}
+
+.App-section .tasks {
+  text-align: left;
+  padding: 20px;
+}
+
+.App-footer {
+  background-color: #282c34;
+  min-height: 10vh;
+  color: white;
+}
+
