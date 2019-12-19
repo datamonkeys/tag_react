@@ -5,83 +5,71 @@ import "./index.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.quotes = [];
     this.state = {
-      displayQuotes: false,
-      index: 0,
+      quotes: false,
+      indexQuotes: 0,
       searchInput: ""
     };
-    this.quotes = [];
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetch("https://programming-quotes-api.herokuapp.com/quotes/lang/en")
       .then(response => response.json())
       .then(resp => {
         this.quotes = resp;
-        // console.log(this.quotes);
       });
-  }
+  };
 
   handleRandomButton = () => {
-    const randomNumber = Math.floor(Math.random() * this.quotes.length);
-    const randomQuote = this.quotes[randomNumber];
+    const quotes = this.quotes;
+    const randomNumber = Math.floor(Math.random() * quotes.length);
+    const randomQuote = quotes[randomNumber];
     this.setState({
-      displayQuotes: [randomQuote]
+      quotes: [randomQuote]
     });
   };
 
-  handleGiveMeFive = () => {
-    const index = this.state.index;
-    const slicedArray = this.quotes.slice(index, index + 5);
+  handleShowMeFiveButton = () => {
+    const indexQuotes = this.state.indexQuotes;
+    const slicedArray = this.quotes.slice(indexQuotes, indexQuotes + 5);
+
     this.setState({
-      displayQuotes: slicedArray,
-      index: index + 5
+      quotes: slicedArray,
+      indexQuotes: indexQuotes + 5
     });
   };
 
   handleOnChange = event => {
-    this.setState(
-      {
-        searchInput: event.target.value
-      },
-      () => {
-        this.handleSearchButton();
-      }
-    );
+    this.setState({
+      searchInput: event.target.value
+    });
   };
 
   handleSearchButton = () => {
-    const filtered = this.quotes.filter(quote =>
-      quote.author
-        .toLowerCase()
-        .includes(this.state.searchInput.toLowerCase().trim())
+    const quotes = this.quotes;
+    const searchInput = this.state.searchInput.toLowerCase();
+    const filtered = quotes.filter(quote =>
+      quote.author.toLowerCase().includes(searchInput)
     );
 
     this.setState({
-      displayQuotes: filtered
+      quotes: filtered
     });
   };
 
   render() {
     return (
       <div>
-        <button onClick={this.handleRandomButton}>Random</button>
-        <button onClick={this.handleGiveMeFive}>Show me 5</button>
+        <button onClick={this.handleRandomButton}>Click</button>
+        <button onClick={this.handleShowMeFiveButton}>Show me 5</button>
         <input type="text" onChange={this.handleOnChange} />
         <button onClick={this.handleSearchButton}>Search</button>
-
-        {this.state.displayQuotes && (
-          <ListContainer quotes={this.state.displayQuotes} />
-        )}
+        {this.state.quotes && <ListContainer quotes={this.state.quotes} />}
       </div>
     );
   }
 }
-
-const ListContainer = props => {
-  console.log(props);
-  return <Lists quotes={props.quotes} />;
-};
 
 const Lists = props => {
   const quotes = props.quotes;
@@ -102,6 +90,10 @@ const ListItem = props => {
       </span>
     </li>
   );
+};
+
+const ListContainer = props => {
+  return <Lists quotes={props.quotes} />;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
