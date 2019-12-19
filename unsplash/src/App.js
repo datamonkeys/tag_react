@@ -8,6 +8,10 @@ import Footer from "./components/Footer";
 
 import Unsplash, { toJson } from "unsplash-js";
 
+const unsplash = new Unsplash({
+  accessKey: "3034944aa771efedc391c99f033dba1b2b060cb3d8e7633b8dd61d4901ce154d"
+});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,10 +21,6 @@ class App extends React.Component {
   }
 
   handleButton = value => {
-    const unsplash = new Unsplash({
-      accessKey:
-        "3034944aa771efedc391c99f033dba1b2b060cb3d8e7633b8dd61d4901ce154d"
-    });
     unsplash.search
       .photos(value, 1, 10, { orientation: "portrait" })
       .then(toJson)
