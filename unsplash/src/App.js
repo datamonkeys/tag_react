@@ -16,20 +16,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: false
+      images: false
     };
   }
 
-  handleButton = value => {
+  handleButton = searchInputValue => {
     unsplash.search
-      .photos(value, 1, 10, { orientation: "portrait" })
+      .photos(searchInputValue, 1, 10, { orientation: "landscape" })
       .then(toJson)
       .then(json => {
+        const images = [];
+
+        json.results.map(image =>
+          images.push({
+            original: image.urls.regular,
+            thumbnail: image.urls.thumb
+          })
+        );
+
+        console.log("images", images);
+
         this.setState({
-          image: {
-            regular: json.results[0].urls.regular,
-            alt: json.results[0].alt_description
-          }
+          images
         });
       });
   };
@@ -38,7 +46,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header handleButton={this.handleButton} />
-        <Main image={this.state.image} />
+        <Main images={this.state.images} />
         <Footer />
       </div>
     );
