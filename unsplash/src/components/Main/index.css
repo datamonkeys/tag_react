@@ -1,3 +1,7 @@
 .App-main {
   min-height: 80vh;
 }
+
+.App-main img {
+  max-height: 60vh;
+}
