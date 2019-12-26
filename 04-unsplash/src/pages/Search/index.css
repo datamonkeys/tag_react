@@ -1,0 +1,14 @@
+.App-search {
+  min-height: 75vh;
+  padding: 25px;
+}
+
+.App-search .image-gallery {
+  max-width: 65vh;
+  margin: auto;
+  padding: 20px;
+}
+
+.App-search h1 {
+  text-align: center;
+}

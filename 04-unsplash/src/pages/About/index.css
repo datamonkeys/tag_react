@@ -1,0 +1,9 @@
+.App-about {
+  min-height: 75vh;
+  padding: 25px;
+  text-align: justify;
+}
+
+.App-about h1 {
+  text-align: center;
+}
