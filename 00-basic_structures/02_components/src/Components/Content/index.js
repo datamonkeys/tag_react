@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import logo from "../../Assets/img/logo.svg";
+import logo from "../../assets/img/logo.svg";
 
 function Logo() {
   return <img src={logo} className="logo" alt="logo" />;
@@ -15,9 +15,7 @@ function Content() {
     <main>
       <Logo />
       <GenerateH1 />
-      <p>
-        Content Component
-      </p>
+      <p>Content Component</p>
       <a
         className="link"
         href="https://reactjs.org"
