@@ -20,34 +20,39 @@ class Search extends React.Component {
     };
   }
 
+  // get the input value and add it to state.
   handleSearch = e => {
     this.setState({
-      searchInput: e.target.value
+      searchInput: e.target.value.trim()
     });
   };
 
+  // handle the input search
+  // get data from searchInput state and use it to fire a request to get the images.
   handleButton = searchInputValue => {
-    unsplash.search
-      .photos(searchInputValue, 1, 10, { orientation: "landscape" })
-      .then(toJson)
-      .then(json => {
-        const images = [];
+    if (searchInputValue != "") {
+      // A server-side Javascript wrapper for working with the Unsplash API.
+      // documentation https://github.com/unsplash/unsplash-js
+      unsplash.search
+        .photos(searchInputValue, 1, 10, { orientation: "landscape" })
+        .then(toJson)
+        .then(data => {
+          const images = [];
 
-        json.results.map(image => {
-          const { regular: original, thumb: thumbnail } = image.urls;
-          const { likes } = image;
+          // handle the result and create the array with images.
+          data.results.map(image => {
+            images.push({
+              original: image.urls.regular,
+              thumbnail: image.urls.thumb,
+              description: `Likes: ${image.likes}`
+            });
+          });
 
-          images.push({
-            original,
-            thumbnail,
-            description: `Likes: ${likes}`
+          this.setState({
+            images
           });
         });
-
-        this.setState({
-          images
-        });
-      });
+    }
   };
 
   render() {

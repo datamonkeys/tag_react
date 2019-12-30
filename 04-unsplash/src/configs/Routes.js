@@ -11,7 +11,11 @@ import Services from "../pages/Services";
 import Search from "../pages/Search";
 
 // Here we can define the routes for our app
-// for example the route "/about" will call the About Component.
+// for example the route "/about" will call the About Component from the pages folder.
+// the <Router> is mandatory to make it work, but in this case the <Router> is defined already in the App.js
+// the links definition are inside the <BurgerMenu> component.
+
+// documentation for the library: https://reacttraining.com/react-router/web/guides/quick-start
 function Routes() {
   return (
     <Switch>

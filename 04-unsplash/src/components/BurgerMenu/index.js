@@ -5,6 +5,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
 
+// This is a perfect example how to combine two libraries
+// one for the burger menu <Menu>
+// and <Link> for the Router.
+
+/* 
+This code: to="/about", will redirect to <About> component, this is defined in src/configs/Routes.js
+
+Like this:
+<Route path="/about">
+  <About />
+</Route>
+*/
+
 function BurgerMenu() {
   return (
     <Menu>
